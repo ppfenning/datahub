@@ -22,6 +22,7 @@ from feast import (
     RequestSource,
     SnowflakeSource,
     ValueType,
+    RedshiftSource
 )
 from feast.data_source import DataSource
 from pydantic import Field
@@ -175,6 +176,9 @@ class FeastRepositorySource(Source):
             name = source.name
         elif isinstance(source, SnowflakeSource):
             platform = "snowflake"
+            name = source.table
+        elif isinstance(source, RedshiftSource):
+            platform = "redshift"
             name = source.table
 
         return platform, name
